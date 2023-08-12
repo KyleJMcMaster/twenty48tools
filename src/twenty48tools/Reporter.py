@@ -2,7 +2,7 @@ import time
 from abc import ABC, abstractmethod
 
 from datetime import datetime
-from Encoder import Encoder
+from twenty48tools.Encoder import Encoder
 from twenty48.Game import Game
 from twenty48.Input import Input
 from twenty48.Display import NoneDisplay
