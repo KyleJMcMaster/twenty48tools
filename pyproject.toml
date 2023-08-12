@@ -1,0 +1,22 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "twenty48tools"
+version = "0.0.1"
+authors = [
+  { name="Kyle McMaster", email="kyle.mcmaster02@gmail.com" },
+]
+description = "Tools for https://github.com/KyleJMcMaster/twenty48game. Made to simplify analysis of bots"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/KyleJMcMaster/twenty48tools"
+"Bug Tracker" = "https://github.com/KyleJMcMaster/twenty48tools/issues"

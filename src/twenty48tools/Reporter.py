@@ -3,9 +3,9 @@ from abc import ABC, abstractmethod
 
 from datetime import datetime
 from Encoder import Encoder
-from twenty48game.Game import Game
-from twenty48game.Input import Input
-from twenty48game.Display import NoneDisplay
+from twenty48.Game import Game
+from twenty48.Input import Input
+from twenty48.Display import NoneDisplay
 
 
 class Reporter(ABC):

@@ -1,6 +1,6 @@
 import pickle
 from abc import ABC
-from twenty48game.GameInformation import GameInformation
+from twenty48.GameInformation import GameInformation
 
 
 class Encoder(ABC):

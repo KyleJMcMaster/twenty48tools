@@ -1,4 +1,4 @@
-from twenty48game.GameInformation import GameInformation
+from twenty48.GameInformation import GameInformation
 from typing import List
 
 

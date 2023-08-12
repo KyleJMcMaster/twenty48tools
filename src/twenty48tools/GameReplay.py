@@ -1,5 +1,5 @@
-from twenty48game.GameInformation import GameInformation
-from twenty48game.Display import Display
+from twenty48.GameInformation import GameInformation
+from twenty48.Display import Display
 
 
 class GameReplay:
