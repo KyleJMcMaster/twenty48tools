@@ -50,7 +50,7 @@ class LightConcurrentReporter(Reporter):
     def __init__(self,  input_:Input, threads:int = 10, filename: str = None):
         self.input = input_
         self.num_threads = threads
-        self.display = ProgressDisplay()
+        self.display = NoneDisplay()
         self.results = mp.Queue()
         if filename is None:
             self.filename = str(datetime.now()) + ".txt"
