@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "twenty48tools"
-version = "0.0.4"
+version = "0.0.5"
 authors = [
   { name="Kyle McMaster", email="kyle.mcmaster02@gmail.com" },
 ]
