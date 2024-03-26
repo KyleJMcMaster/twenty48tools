@@ -1,11 +1,14 @@
 import time
 from abc import ABC, abstractmethod
+import multiprocessing as mp
+import numpy as np
 
 from datetime import datetime
+from typing import List
 from twenty48tools.Encoder import Encoder
 from twenty48.Game import Game
 from twenty48.Input import Input
-from twenty48.Display import NoneDisplay
+from twenty48.Display import NoneDisplay, ProgressDisplay
 
 
 class Reporter(ABC):
@@ -42,6 +45,41 @@ class FileReporter(Reporter):
         t = time.perf_counter() - t
         print(f"All games completed in {t} seconds")
 
+class LightConcurrentReporter(Reporter):
+    # plays n concurrent games and reports the quartiles, mean and std.dev of mean 
+    def __init__(self,  input_:Input, threads:int = 10, filename: str = None):
+        self.input = input_
+        self.num_threads = threads
+        self.display = ProgressDisplay()
+        self.results = mp.Queue()
+        if filename is None:
+            self.filename = str(datetime.now()) + ".txt"
+        else:
+            self.filename = filename
+
+
+    def generate_report(self, num_games: int):
+        processes = [mp.Process(target=self.play_game, args=(1, self.results)) for x in range(self.num_threads)]
+
+        for p in processes:
+            p.start()
+
+        for p in processes:
+            p.join()
+
+        results = [self.results.get() for p in processes]
+
+        with open(self.filename, 'ab') as file:
+            file.write(np.mean(results), np.std(results))
+        
+
+
+    def play_games(self, num_games: int, output):
+        for _ in range(num_games):
+            g = Game(display=self.display, input=self.input)
+            output.put(g.play_game().score)
+
+        
 
 
 
