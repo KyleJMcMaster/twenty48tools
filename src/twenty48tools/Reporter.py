@@ -58,7 +58,7 @@ class LightConcurrentReporter(Reporter):
             self.filename = filename
 
 
-    def generate_report(self, num_games: int):
+    def generate_report(self, num_games: int) -> list[float, float]:
         processes = [mp.Process(target=self.play_game, args=(1, self.results)) for x in range(self.num_threads)]
 
         for p in processes:
@@ -68,10 +68,8 @@ class LightConcurrentReporter(Reporter):
             p.join()
 
         results = [self.results.get() for p in processes]
-
-        with open(self.filename, 'ab') as file:
-            file.write(np.mean(results), np.std(results))
         
+        return [np.mean(results), np.std(results)]
 
 
     def play_game(self, num_games: int, output):
