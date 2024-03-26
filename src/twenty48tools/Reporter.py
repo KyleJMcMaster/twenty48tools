@@ -74,7 +74,7 @@ class LightConcurrentReporter(Reporter):
         
 
 
-    def play_games(self, num_games: int, output):
+    def play_game(self, num_games: int, output):
         for _ in range(num_games):
             g = Game(display=self.display, input=self.input)
             output.put(g.play_game().score)
