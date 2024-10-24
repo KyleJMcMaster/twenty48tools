@@ -59,6 +59,7 @@ class LightConcurrentReporter(Reporter):
 
 
     def generate_report(self, num_games: int) -> list[float, float]:
+        # reports mean and std of score
         processes = [mp.Process(target=self.play_game, args=(1, self.results)) for x in range(self.num_threads)]
 
         for p in processes:
@@ -69,13 +70,14 @@ class LightConcurrentReporter(Reporter):
 
         results = [self.results.get() for p in processes]
         
-        return [np.mean(results), np.std(results)]
+        return [results]
 
 
     def play_game(self, num_games: int, output):
         for _ in range(num_games):
             g = Game(display=self.display, input=self.input)
-            output.put(g.play_game().score)
+            game_info = g.play_game()
+            output.put([game_info.score, game_info.turns[-1].max_tile])
 
         
 
